@@ -6,3 +6,9 @@
 //
 
 import Foundation
+import MapKit
+
+struct Place: Identifiable {
+    var id = UUID() // Un identificador único
+    var coordinate: CLLocationCoordinate2D
+}

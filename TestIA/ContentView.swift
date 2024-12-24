@@ -8,14 +8,41 @@
 import SwiftUI
 
 struct ContentView: View {
+    
+    @StateObject private var viewModel = TestIAViewModel()
+
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+        ZStack {
+            if viewModel.isLoading {
+                ProgressView("Cargando...")
+                    .progressViewStyle(CircularProgressViewStyle())
+                    .padding()
+            } else {
+                TabView {
+                    HomeView()
+                        .tabItem {
+                            Image(systemName: "house.fill")
+                            Text("Inicio")
+                        }
+                    
+                    MapsView()
+                        .tabItem {
+                            Image(systemName: "map.fill")
+                            Text("Mapa")
+                        }
+                    OtherView()
+                        .tabItem {
+                            Image(systemName: "gearshape.fill")
+                            Text("Otros")
+                        }
+                }
+            }
         }
-        .padding()
+        .accentColor(.blue)
+        .environmentObject(viewModel)
+        .onAppear {
+            viewModel.getData()
+        }
     }
 }
 

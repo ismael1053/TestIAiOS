@@ -6,13 +6,21 @@
 //
 
 import SwiftUI
+import MapKit
 
 struct MapsView: View {
+    
+    @EnvironmentObject var viewModel: TestIAViewModel
+        
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        Map(coordinateRegion: $viewModel.region, annotationItems: viewModel.places) { place in
+            MapPin(coordinate: place.coordinate, tint: .blue)
+        }
+        .edgesIgnoringSafeArea(.top)
     }
 }
 
 #Preview {
     MapsView()
 }
+ 

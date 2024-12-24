@@ -8,8 +8,29 @@
 import SwiftUI
 
 struct HomeView: View {
+    @EnvironmentObject var viewModel: TestIAViewModel
+
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        VStack {
+            Text(viewModel.cityName)
+                .font(.largeTitle)
+                .fontWeight(.bold)
+            
+            Text(viewModel.temperature)
+                .font(.title)
+                .foregroundColor(.blue)
+            
+            Text(viewModel.description)
+                .font(.body)
+                .padding()
+            
+            Text(viewModel.humidity)
+                .font(.body)
+                .foregroundColor(.gray)
+            
+            Spacer()
+        }
+        .padding()
     }
 }
 

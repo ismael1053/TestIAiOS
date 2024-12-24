@@ -8,8 +8,31 @@
 import SwiftUI
 
 struct OtherView: View {
+    @EnvironmentObject var viewModel: TestIAViewModel
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        List(viewModel.localData) { data in
+            VStack(alignment: .leading) {
+                Text(data.date)
+                    .font(.headline)
+                Text(viewModel.description)
+                    .font(.headline)
+                Text(viewModel.humidity)
+                    .font(.headline)
+                    .foregroundColor(.gray)
+                HStack {
+                    Text(viewModel.temperature)
+                        .font(.headline)
+                        .foregroundColor(.blue)
+                    Spacer()
+                    Text(data.cityName)
+                        .font(.subheadline)
+                        .foregroundColor(.gray)
+                }
+                .padding(.top, 4)
+            }
+            .padding()
+        }
     }
 }
 
